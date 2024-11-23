@@ -387,6 +387,9 @@ background: linear-gradient(135deg, #6f7440 0%, #999 100%) no-repeat 0 0/200%;
 .fs-18 {
     font-size: 18pt !important;
 }
+.form-control {
+  font-size: 9pt !important;
+}
 .form-control:focus {
   color: var(--bs-body-color);
   background-color: var(--bs-body-bg);

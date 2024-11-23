@@ -30,7 +30,7 @@
                             <h2 class="text-center">Hashing (SHA-256)</h2>
                             <div class="form-floating mb-2 mt-3">
                                 <input type="text" id="hashInput" class="form-control" placeholder="Enter text for hashing">
-                                <label for="floatingInput">HASH</label>
+                                <label for="floatingInput">TEXT</label>
                             </div>
                             <button type="button" id="btnHash">Hash</button>
                             <label class="f-label" for="floatingTextarea">Hash Result</label>
@@ -40,26 +40,25 @@
                             <h2 class="text-center">Symmetric Encryption (AES)</h2>
                             <div class="form-floating mb-3">
                                 <input type="text" id="aesInput" class="form-control" placeholder="Enter text for AES encryption">
-                                <label for="floatingInput">AES</label>
+                                <label for="floatingInput">TEXT</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" id="aesKey" class="form-control" placeholder="Enter key for AES encryption">
-                                <label for="floatingInput">KEY AES</label>
+                                <input type="text" id="aesKey" class="form-control stripspaces" placeholder="Enter key for AES encryption">
+                                <label for="floatingInput">AES KEY</label>
                             </div>
                             <button type="button" id="encryptAES">AES Encryption</button>
                             <label class="f-label" for="floatingTextarea">AES Result</label>
                             <textarea class="form-control" placeholder="Your result of aes encryption" id="encryptedText" rows="4" readonly></textarea>
+                            
                             <button type="button" id="decryptAES">AES Decryption</button>
-                            <div class="form-floating mb-3">
-                                <input type="text" id="decryptedText" class="form-control" placeholder="Result of AES decryption" readonly>
-                                <label for="floatingInput">Text Result</label>
-                            </div>
+                            <label  class="f-label" for="floatingTextarea">Text Results</label>
+                            <textarea class="form-control" placeholder="Result of AES decryption" id="decryptedText" rows="1" readonly></textarea>
                         </div>
                         <div class="tab-pane fade" id="rsa-tab" role="tabpanel" aria-labelledby="pills-contact-tab">
                             <h2 class="text-center">Asymmetric Encryption (RSA)</h2>
                             <div class="form-floating mb-3">
                                 <input type="text" id="rsaInput" class="form-control" placeholder="Enter text for RSA encryption">
-                                <label for="floatingInput">RSA</label>
+                                <label for="floatingInput">TEXT</label>
                             </div>
                             <button type="button" id="generateRSAKeys">Generate RSA Key</button>
                             <label class="f-label" for="floatingTextarea">RSA Public Key</label>
@@ -73,10 +72,8 @@
                             <textarea class="form-control" placeholder="Your result of rsa encryption" id="rsaEncrypted" rows="3" readonly></textarea>
                             
                             <button type="button" id="decryptRSA">RSA Decryption</button>
-                            <div class="form-floating mb-3">
-                                <input type="text" id="rsaDecrypted" class="form-control" placeholder="Result of RSA decryption" readonly>
-                                <label for="floatingInput">Text Results</label>
-                            </div>
+                            <label  class="f-label" for="floatingTextarea">Text Results</label>
+                            <textarea class="form-control" placeholder="Result of RSA decryption" id="rsaDecrypted" rows="1" readonly></textarea>
                            
                         </div>
                     </div>
@@ -114,116 +111,7 @@
 
 <!-- 
 <script type="text/javascript" src="js/script.js"></script> -->
-<script>
-    $(document).ready(function(){
-        let rsaEncrypt = '';
+<script type="text/javascript" src="js/function.js"></script>
 
-        // Function to encryption using SHA
-        $("#btnHash").click(function(){
-            var text = $('#hashInput').val();
-            if(text == '' ) {
-                Swal.fire({
-                    title: "Oopss!",
-                    text: "Text cannot be empty!",
-                    icon: "warning",
-                    confirmButtonColor: '#f38383',
-                });
-            } else {
-                var hash = CryptoJS.SHA256(text).toString();
-                $('#hashOutput').val(hash);
-            }
-        });
-
-        // Function to encryption using RSA
-        $("#encryptAES").click(function(){
-            var text = $('#aesInput').val();
-            var key = $('#aesKey').val();
-            if(text == '' ||  key == '') {
-                Swal.fire({
-                    title: "Oopss!",
-                    text: "Text or Key cannot be empty!",
-                    icon: "warning",
-                    confirmButtonColor: '#f38383',
-                });
-            } else {
-                var encrypted = CryptoJS.AES.encrypt(text, key).toString();
-                $('#encryptedText').val(encrypted);
-            }
-        });
-
-        // Function to decryption using RSA
-        $("#decryptAES").click(function(){
-            var encryptedText = $('#encryptedText').val();
-            var key = $('#aesKey').val();
-
-            if(key == '') {
-                Swal.fire({
-                    title: "Oopss!",
-                    text: "Key cannot be empty!",
-                    icon: "warning",
-                    confirmButtonColor: '#f38383',
-                });
-            } else {
-                var decrypted = CryptoJS.AES.decrypt(encryptedText, key).toString(CryptoJS.enc.Utf8);
-               
-                if(decrypted == '') {
-                    Swal.fire({
-                        title: "Oopss!",
-                        text: "Aes key is wrong!",
-                        icon: "warning",
-                        confirmButtonColor: '#f38383',
-                    });
-                } else {
-                    $('#decryptedText').val(decrypted);
-                }
-            }
-
-            
-        });
-
-         // Function to generate private and public keys
-        $("#generateRSAKeys").click(function(){
-            rsaEncrypt = new JSEncrypt();
-            let publicKey = rsaEncrypt.getPublicKey();
-            let privateKey = rsaEncrypt.getPrivateKey();
-            
-            $('#rsaPubliceKey').val(publicKey);
-            $('#rsaPrivateKey').val(privateKey);
-        });
-
-        // Function to encryption using RSA
-        $("#encryptRSA").click(function(){
-            var text = $('#rsaInput').val();
-            
-            if(text == '' || rsaEncrypt == '') {
-                Swal.fire({
-                    title: "Oopss!",
-                    text: "Text or Key cannot be empty!",
-                    icon: "warning",
-                    confirmButtonColor: '#f38383',
-                });
-            } else {
-                var encrypted = rsaEncrypt.encrypt(text);
-                $('#rsaEncrypted').val(encrypted);
-            }
-        });
-
-         // Function to decryption using RSA
-        $("#decryptRSA").click(function(){
-            var encryptedText = $('#rsaEncrypted').val();
-            if(rsaEncrypt == '') {
-                Swal.fire({
-                    title: "Oopss!",
-                    text: "Key cannot be empty!",
-                    icon: "warning",
-                    confirmButtonColor: '#f38383',
-                });
-            } else {
-                var decrypted = rsaEncrypt.decrypt(encryptedText);
-                $('#rsaDecrypted').val(decrypted);
-            }
-        });
-    });
-</script>
 </body>
 </html>
