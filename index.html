@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team 10 - Cryptography and Steganography</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+    <div class="content center h-100"> 
+        <div id="container" class="row">
+            <div class="login col-md-6">
+                <div class="content">
+                    <ul class="nav nav-pills mb-3 border-bottom border-2" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link fw-semibold active position-relative" data-bs-toggle="pill" data-bs-target="#sha-tab" type="button" role="tab" aria-controls="pills-home" aria-selected="true">SHA</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link fw-semibold position-relative" data-bs-toggle="pill" data-bs-target="#aes-tab" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">AES</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link fw-semibold position-relative" data-bs-toggle="pill" data-bs-target="#rsa-tab" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">RSA</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content border rounded-3 border-primary p-3 text-danger" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="sha-tab" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <h2 class="text-center">Hashing (SHA-256)</h2>
+                            <div class="form-floating mb-2 mt-3">
+                                <input type="text" id="hashInput" class="form-control" placeholder="Enter text for hashing">
+                                <label for="floatingInput">HASH</label>
+                            </div>
+                            <button type="button" id="btnHash">Hash</button>
+                            <label class="f-label" for="floatingTextarea">Hash Result</label>
+                            <textarea class="form-control" placeholder="Your result of hash" id="hashOutput" rows="4" readonly></textarea>   
+                        </div>
+                        <div class="tab-pane fade" id="aes-tab" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <h2 class="text-center">Symmetric Encryption (AES)</h2>
+                            <div class="form-floating mb-3">
+                                <input type="text" id="aesInput" class="form-control" placeholder="Enter text for AES encryption">
+                                <label for="floatingInput">AES</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" id="aesKey" class="form-control" placeholder="Enter key for AES encryption">
+                                <label for="floatingInput">KEY AES</label>
+                            </div>
+                            <button type="button" id="encryptAES">AES Encryption</button>
+                            <label class="f-label" for="floatingTextarea">AES Result</label>
+                            <textarea class="form-control" placeholder="Your result of aes encryption" id="encryptedText" rows="4" readonly></textarea>
+                            <button type="button" id="decryptAES">AES Decryption</button>
+                            <div class="form-floating mb-3">
+                                <input type="text" id="decryptedText" class="form-control" placeholder="Result of AES decryption" readonly>
+                                <label for="floatingInput">Text Result</label>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="rsa-tab" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <h2 class="text-center">Asymmetric Encryption (RSA)</h2>
+                            <div class="form-floating mb-3">
+                                <input type="text" id="rsaInput" class="form-control" placeholder="Enter text for RSA encryption">
+                                <label for="floatingInput">RSA</label>
+                            </div>
+                            <button type="button" id="generateRSAKeys">Generate RSA Key</button>
+                            <label class="f-label" for="floatingTextarea">RSA Public Key</label>
+                            <textarea class="form-control" placeholder="Your rsa public key" id="rsaPubliceKey" rows="3" readonly></textarea>
+                            
+                            <label class="f-label" for="floatingTextarea">RSA Private Key</label>
+                            <textarea class="form-control" placeholder="Your rsa private key" id="rsaPrivateKey" rows="3" readonly></textarea>
+
+                            <button type="button" id="encryptRSA">RSA Encryption</button>
+                            <label  class="f-label" for="floatingTextarea">RSA Results</label>
+                            <textarea class="form-control" placeholder="Your result of rsa encryption" id="rsaEncrypted" rows="3" readonly></textarea>
+                            
+                            <button type="button" id="decryptRSA">RSA Decryption</button>
+                            <div class="form-floating mb-3">
+                                <input type="text" id="rsaDecrypted" class="form-control" placeholder="Result of RSA decryption" readonly>
+                                <label for="floatingInput">Text Results</label>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page front col-md-6">
+                <div class="content">
+                    <h2 class="text-center fs-18 mb-5">Cryptography and Steganography</h2><br>
+                    <div class="text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus text-center"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                    </div>
+                    <h1 class="text-center">Team 10</h1>
+                    <p class="text-center">Application for encryption and decryption using Hashing (SHA), Symmetric (AES) and Asymmetric (RSA)</p>
+                    <h2>Members of the Team :</h2><br>
+                    <ol class="h4">
+                        <li>SHAN HTET AUNG (Ketua)</li>
+                        <li>WAHYU MEI PRATIWI</li>
+                        <li>VEDTRA CRISNANDA PURBA</li>
+                        <li>VANI AYU ANASTASYA</li>
+                        <li>SYARIF BAHAMI FEBRIADI</li>
+                        <li>SYAIFUL ULUM</li>
+                        <li>SLAMET ARIFIN</li>
+                    </ol> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menyisipkan pustaka CryptoJS dan JSEncrypt -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.0.0/jsencrypt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
+
+<!-- 
+<script type="text/javascript" src="js/script.js"></script> -->
+<script>
+    $(document).ready(function(){
+        let rsaEncrypt = '';
+
+        // Function to encryption using SHA
+        $("#btnHash").click(function(){
+            var text = $('#hashInput').val();
+            if(text == '' ) {
+                Swal.fire({
+                    title: "Oopss!",
+                    text: "Text cannot be empty!",
+                    icon: "warning",
+                    confirmButtonColor: '#f38383',
+                });
+            } else {
+                var hash = CryptoJS.SHA256(text).toString();
+                $('#hashOutput').val(hash);
+            }
+        });
+
+        // Function to encryption using RSA
+        $("#encryptAES").click(function(){
+            var text = $('#aesInput').val();
+            var key = $('#aesKey').val();
+            if(text == '' ||  key == '') {
+                Swal.fire({
+                    title: "Oopss!",
+                    text: "Text or Key cannot be empty!",
+                    icon: "warning",
+                    confirmButtonColor: '#f38383',
+                });
+            } else {
+                var encrypted = CryptoJS.AES.encrypt(text, key).toString();
+                $('#encryptedText').val(encrypted);
+            }
+        });
+
+        // Function to decryption using RSA
+        $("#decryptAES").click(function(){
+            var encryptedText = $('#encryptedText').val();
+            var key = $('#aesKey').val();
+
+            if(key == '') {
+                Swal.fire({
+                    title: "Oopss!",
+                    text: "Key cannot be empty!",
+                    icon: "warning",
+                    confirmButtonColor: '#f38383',
+                });
+            } else {
+                var decrypted = CryptoJS.AES.decrypt(encryptedText, key).toString(CryptoJS.enc.Utf8);
+               
+                if(decrypted == '') {
+                    Swal.fire({
+                        title: "Oopss!",
+                        text: "Aes key is wrong!",
+                        icon: "warning",
+                        confirmButtonColor: '#f38383',
+                    });
+                } else {
+                    $('#decryptedText').val(decrypted);
+                }
+            }
+
+            
+        });
+
+         // Function to generate private and public keys
+        $("#generateRSAKeys").click(function(){
+            rsaEncrypt = new JSEncrypt();
+            let publicKey = rsaEncrypt.getPublicKey();
+            let privateKey = rsaEncrypt.getPrivateKey();
+            
+            $('#rsaPubliceKey').val(publicKey);
+            $('#rsaPrivateKey').val(privateKey);
+        });
+
+        // Function to encryption using RSA
+        $("#encryptRSA").click(function(){
+            var text = $('#rsaInput').val();
+            
+            if(text == '' || rsaEncrypt == '') {
+                Swal.fire({
+                    title: "Oopss!",
+                    text: "Text or Key cannot be empty!",
+                    icon: "warning",
+                    confirmButtonColor: '#f38383',
+                });
+            } else {
+                var encrypted = rsaEncrypt.encrypt(text);
+                $('#rsaEncrypted').val(encrypted);
+            }
+        });
+
+         // Function to decryption using RSA
+        $("#decryptRSA").click(function(){
+            var encryptedText = $('#rsaEncrypted').val();
+            if(rsaEncrypt == '') {
+                Swal.fire({
+                    title: "Oopss!",
+                    text: "Key cannot be empty!",
+                    icon: "warning",
+                    confirmButtonColor: '#f38383',
+                });
+            } else {
+                var decrypted = rsaEncrypt.decrypt(encryptedText);
+                $('#rsaDecrypted').val(decrypted);
+            }
+        });
+    });
+</script>
+</body>
+</html>
